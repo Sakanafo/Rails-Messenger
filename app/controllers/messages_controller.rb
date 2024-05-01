@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @msg = Message.all
+    @pagy, @msg = pagy(Message.order(created_at: :desc), items: 5)
     @new_message = Message.new
   end
 
