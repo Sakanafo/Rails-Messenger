@@ -1,0 +1,13 @@
+<h1>Messages</h1>
+
+<% @msg.each do |message| %>
+  <h5>
+    <%= link_to '[x]', message_path(message), data: {"turbo-method": :delete, confirm: 'Удалить сообщение?'} %>
+    <time datetime="<%= message.formatted_created_at %>">
+      <%= message.formatted_created_at %>
+    </time>
+    <%= message.body %>
+  </h5>
+<% end %>
+
+<%= render 'form'%>

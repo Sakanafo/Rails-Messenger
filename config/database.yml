@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: messenger
+  username: root
+  password: root
+
+development:
+  <<: *default
+  database: messenger_development
+
+test:
+  <<: *default
+  database: messenger_test
+
+production:
+  <<: *default
+  database: messenger_production
+  username: messenger
+  password: <%= ENV["CHAT_DATABASE_PASSWORD"] %>

@@ -1,0 +1,8 @@
+<%= form_with url: messages_path, model: @new_message do |f| %>
+  <div>
+    <%= f.text_area :body, required: true, minlength: 1, placeholder: 'Написать сообщение...' %>
+  </div>
+
+  <%= f.submit 'Отправить'%>
+
+<% end %>
