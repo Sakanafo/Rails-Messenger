@@ -29,6 +29,8 @@ gem "jbuilder"
 gem 'faker', '~> 3.3', '>= 3.3.1'
 
 gem 'pagy', '~> 8.3'
+
+gem 'slim', '~> 5.2', '>= 5.2.1'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
