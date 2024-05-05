@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Message < ApplicationRecord
-  validates :body, presence: true, length: {minimum: 1}
+  validates :body, presence: true, length: { minimum: 1 }
 
   def formatted_created_at
     created_at.strftime('%d/%m %H:%M:%S ')

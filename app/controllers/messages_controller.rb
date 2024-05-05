@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   def index
     @pagy, @messages = pagy(Message.order(created_at: :desc), items: 5)
