@@ -4,7 +4,10 @@
 # Customize only what you really need and notice that the core Pagy works also without any of the following lines.
 # Should you just cherry pick part of this file, please maintain the require-order of the extras
 
-require 'pagy/extras/bootstrap'
+# Use just one:
+# require 'pagy/extras/bootstrap'
+# require 'pagy/extras/bulma'
+require 'pagy/extras/pagy'
 
 # Pagy Variables
 # See https://ddnexus.github.io/pagy/docs/api/pagy#variables

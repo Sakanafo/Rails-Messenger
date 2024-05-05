@@ -1,10 +1,11 @@
-<%== pagy_bootstrap_nav @pagy %>
-  <% @msg.each do |message| %>
+
+<%== pagy_nav @pagy %>
+
+  <% @messages.each do |message| %>
     <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
         <strong class="mr-auto">UserName</strong>
-        <small><time datetime="<%= message.formatted_created_at %>">
-          <%= message.formatted_created_at %></time></small>
+        <small><%= message.formatted_created_at %></small>
 
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
           <span aria-hidden="true">
