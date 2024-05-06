@@ -1,0 +1,25 @@
+doctype html 
+html
+  head
+    title 
+      | Chat
+    meta[charset='utf-8']
+    meta (name="viewport" content="width=device-width,initial-scale=1")
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body
+    .navbar.navbar-expand-md.navbar-dark.bg-dark.container.mb-2
+      .collapse.navbar-collapse.navbarsExampleDefault
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            = link_to 'Главная', root_path, class: 'nav-link px-2 text-gray'
+
+          li.nav-item
+            = link_to 'Чат', messages_url, class: 'nav-link px-2 text-gray'
+    
+  .container
+    == yield

@@ -32,5 +32,14 @@ module Chat
         system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
       end
     end
+
+    config.generators do |g|
+      g.view_specs false
+      g.helper_specs false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.template_engine :slim
+    end
   end
 end

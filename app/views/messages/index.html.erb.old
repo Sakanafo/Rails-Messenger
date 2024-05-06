@@ -1,6 +1,6 @@
-
+<div class="mb-2 ml-0 row">
 <%== pagy_nav @pagy %>
-
+</div>
   <% @messages.each do |message| %>
     <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
