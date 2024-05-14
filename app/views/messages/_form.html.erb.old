@@ -1,9 +1,0 @@
-<%= form_with url: messages_path, model: @new_message do |f| %>
-  <div class="form-group">
-    <form class="form-inline">
-      <%= f.text_area :body, required: true, minlength: 1, placeholder: 'Написать сообщение...', class: "form-control mr-sm-2" %>
-      <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Отправить</button>
-    </form>
-  </div>
-
-<% end %>

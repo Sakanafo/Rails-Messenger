@@ -3,7 +3,6 @@
 class MessagesController < ApplicationController
   def index
     @pagy, @messages = pagy(Message.order(created_at: :desc), items: 5)
-    @new_message = Message.new
   end
 
   def create
@@ -11,7 +10,7 @@ class MessagesController < ApplicationController
     if @new_message.save
       redirect_to messages_path
     else
-      render :root_path
+      redirect_to messages_path
     end
   end
 
