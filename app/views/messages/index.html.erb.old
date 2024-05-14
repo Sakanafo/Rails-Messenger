@@ -1,0 +1,24 @@
+<div class="mb-2 ml-0 row">
+<%== pagy_nav @pagy %>
+</div>
+  <% @messages.each do |message| %>
+    <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="mr-auto">UserName</strong>
+        <small><%= message.formatted_created_at %></small>
+
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">
+            <%= link_to image_tag("delete.png", alt: "[x]", size: "10x10"), message_path(message), data: {"turbo-method": :delete, confirm: 'Are you sure?'} %>
+          </span>
+        </button>
+      </div>
+
+        <div class="toast-body">
+          <p class="text-break">
+          <%= message.body %></p>
+        </div>
+    </div>
+  <% end %>
+
+<%= render 'form'%>
