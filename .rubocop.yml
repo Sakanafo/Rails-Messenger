@@ -2,6 +2,8 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
   - rubocop-capybara
 
 AllCops:
@@ -32,3 +34,9 @@ Metrics/BlockLength:
 Layout/LineLength:
   Exclude:
     - spec/**/*.rb
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false

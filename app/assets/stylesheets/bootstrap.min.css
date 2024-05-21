@@ -2823,7 +2823,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .dropdown-item:focus, .dropdown-item:hover {
 	color: #16181b;
 	text-decoration: none;
-	background-color: #f8f9fa
+	background-color: #cbcdcf
 }
 .dropdown-item.active, .dropdown-item:active {
 	color: #fff;

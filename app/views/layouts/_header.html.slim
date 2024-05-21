@@ -1,0 +1,24 @@
+.navbar.navbar-expand-sm.navbar-dark.bg-dark.container.mb-2
+  .collapse.navbar-collapse.navbarsExampleDefault
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        = link_to 'Home', root_path, class: 'nav-link px-2 text-gray'
+
+      li.nav-item
+        = link_to 'Chat', messages_url, class: 'nav-link px-2 text-gray'
+
+    .d-flex.col-3.justify-content-end
+      - if user_signed_in?
+        .div.btn-group.dropleft
+          button.btn.btn-secondary.dropdown-toggle[data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+            span.navbar-toggler-icon
+          .dropdown-menu
+            .dropdown-item.disabled
+              = "Logged in as: #{current_user.name}"
+            .dropdown-divider
+            = link_to 'Profile', edit_user_registration_path, class: 'dropdown-item'
+            = link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, 
+              class: 'dropdown-item'
+      - else
+        = link_to 'Sing In', new_user_session_path, class: 'btn btn-success mr-2 text-white'
+        = link_to 'Sing Up', new_user_registration_path, class: 'btn btn-primary text-white'
