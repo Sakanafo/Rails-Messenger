@@ -4,12 +4,12 @@ h2 Log in
   .field.mt-5
     = f.label :email
   .field
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+    = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email@address.com'
 
   .field.mt-3
     = f.label :password
   .field
-    = f.password_field :password, autocomplete: "current-password"
+    = f.password_field :password, autocomplete: "current-password", placeholder: '********'
 
   - if devise_mapping.rememberable?
     .field.my-3

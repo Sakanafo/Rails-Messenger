@@ -1,30 +1,36 @@
 # frozen_string_literal: true
 
 class MessagesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: %i[create destroy]
 
   def index
-    @pagy, @messages = pagy(Message.order(created_at: :desc).includes(:user), items: 5)
+    @pagy, @messages = pagy(Message.where(room_id: nil).order(created_at: :desc).includes(:user), items: 5)
     @new_message = Message.new
   end
 
   def create
     @new_message = Message.new message_params
     @new_message.user = current_user if current_user.present?
-    @new_message.save ? '' : flash[:error] = 'Error sending message'
+    flash[:error] = 'Error sending message' unless @new_message.save
 
-    redirect_to messages_path
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
-    Message.find(params[:id]).destroy
+    message = Message.find(params[:id])
+    if message.user == current_user
+      message.destroy
+      flash[:notice] = 'Message deleted'
+    else
+      flash[:error] = 'You cannot delete this message'
+    end
 
-    redirect_to messages_path, status: :see_other
+    redirect_back(fallback_location: root_path)
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:body, :room_id)
   end
 end

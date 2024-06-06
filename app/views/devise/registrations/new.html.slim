@@ -6,12 +6,12 @@ h2 Sign up
   .field.mt-5
     = f.label :email
   .field
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+    = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email@address.com'
 
   .field.mt-3
     = f.label :name
   .field
-    = f.text_field :name, autofocus: true, autocomplete: "name"
+    = f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'username'
 
   .field.mt-3
     = f.label :password
@@ -19,12 +19,12 @@ h2 Sign up
       p.small
         |  (#{@minimum_password_length} characters minimum)
   .field
-    = f.password_field :password, autocomplete: "new-password"
+    = f.password_field :password, autocomplete: "new-password", placeholder: '********'
 
   .field.mt-3
     = f.label :password_confirmation
   .field
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+    = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: '********'
 
   .actions.my-3
     = f.submit "Sign up"

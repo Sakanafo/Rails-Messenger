@@ -1,2 +1,5 @@
-.notice = notice
-.alert = alert
+- flash.each do |type, message|
+  - toast_classes = (type == 'notice' ? '' : 'bg-danger text-white')
+  - role = (type == 'error' ? 'alert' : 'error')
+  .toast.fade.show class=toast_classes role=role aria-live="assertive" aria-atomic="true"
+    .toast-body= message

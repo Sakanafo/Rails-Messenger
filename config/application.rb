@@ -39,7 +39,7 @@ module Chat
       g.stylesheets false
       g.javascripts false
       g.helper false
-      g.template_engine :slim
+      g.template_engine :erb
     end
   end
 end

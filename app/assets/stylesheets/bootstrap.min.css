@@ -55,7 +55,7 @@ body {
 	line-height: 1.5;
 	color: #212529;
 	text-align: left;
-	background-color: #fff
+	background-color: #cbd2dc
 }
 [tabindex="-1"]:focus:not(:focus-visible) {
 	outline: 0!important
@@ -1725,7 +1725,7 @@ pre code {
 	color: #495057;
 	background-color: #fff;
 	background-clip: padding-box;
-	border: 1px solid #ced4da;
+	border: 1px solid #999fa7;
 	border-radius: .25rem;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
@@ -1745,9 +1745,9 @@ pre code {
 .form-control:focus {
 	color: #495057;
 	background-color: #fff;
-	border-color: #80bdff;
+	border-color: #999fa7;
 	outline: 0;
-	box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25)
+	box-shadow: 0 0 0 .2rem rgba(104, 108, 114, .25)
 }
 .form-control::-webkit-input-placeholder {
 	color: #6c757d;
@@ -5546,7 +5546,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 	background-color: #bd2130!important
 }
 .bg-light {
-	background-color: #f8f9fa!important
+	background-color: #9ea4ab!important
 }
 a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover {
 	background-color: #dae0e5!important

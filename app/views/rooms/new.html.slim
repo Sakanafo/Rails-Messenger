@@ -1,0 +1,13 @@
+= form_with(model: @room, local: true) do |form|
+  .field.mt-3
+    = form.label :name, 'Enter room name', style: 'font-size: 1.5em;'
+  .field
+    = form.text_field :name
+    p.small
+        |  (3-12 characters)
+
+  .actions.my-3
+    = form.submit "Create chat room", class: 'btn btn-outline-success my-2 my-sm-2'
+
+hr
+= link_to "Back", :back, class: 'btn btn-outline-secondary mt-2'

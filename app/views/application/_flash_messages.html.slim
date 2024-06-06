@@ -1,0 +1,7 @@
+- if flash[:notice]
+  .toast.fade.show role="alert" aria-live="assertive" aria-atomic="true"
+    .toast-body= flash[:notice]
+
+- if flash[:alert]
+  .toast.fade.show.bg-danger.text-white role="alert" aria-live="assertive" aria-atomic="true"
+    .toast-body= flash[:alert]

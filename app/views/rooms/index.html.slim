@@ -1,0 +1,21 @@
+.field.mt-2
+== pagy_nav(@pagy)
+
+.field.mt-2
+.row.justify-content-between.align-items-center.mt-2
+  .col-auto
+    = link_to "Create Room", new_room_path, class: 'btn btn-outline-success my-2 my-sm-0'
+  .col-auto.ml-auto
+    = render 'room_search'
+.field.mt-2
+.row.row-cols-1.row-cols-md-2.row-cols-lg-4.g-4.my-3
+  - @rooms.each do |room|
+    .col.mb-5
+      .card.h-100.border-dark.h-100.d-flex.flex-column.justify-content-center.align-items-center
+        .card-header.w-100
+          h5.card-title = room.name
+          p.card-text
+            | Created:
+            = " #{room.created_at.strftime('%d.%m.%Y')}"
+        .card-footer.w-100
+          = link_to 'View', room_path(room), class: 'btn btn-outline-success btn-block'

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :messages, only: %i[index create destroy]
+  resources :rooms, only: %i[new create index show]
 
   root 'pages#index'
 end

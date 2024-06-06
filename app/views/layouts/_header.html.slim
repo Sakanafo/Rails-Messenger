@@ -7,6 +7,12 @@
       li.nav-item
         = link_to 'Chat', messages_url, class: 'nav-link px-2 text-gray'
 
+      li.nav-item
+        = link_to 'Rooms', rooms_path, class: 'nav-link px-2 text-gray'
+
+      li.nav-item
+        = link_to "New Room", new_room_path, class: "nav-link"
+        
     .d-flex.col-3.justify-content-end
       - if user_signed_in?
         .div.btn-group.dropleft

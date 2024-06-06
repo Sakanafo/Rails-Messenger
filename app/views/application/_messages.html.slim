@@ -1,0 +1,24 @@
+.conteiner.d-grid.gap-auto.rounded
+  .p-4.bg-light.border
+    - if @messages.empty?
+      | No messages
+    else
+      - @messages.each do |message|
+          .toast.fade.show (role="alert" aria-live="assertive" aria-atomic="true")
+            .toast-header
+              small.text-muted
+                = "#{message.user.name} | #{message.user.email}"
+              strong.mr-auto
+              = message.formatted_created_at
+
+              - if current_user.present? && message.user_id == current_user.id
+                button.ml-2.close (type="button" data-dismiss="toast" aria-label="Close")
+                span (aria-hidden="true")
+                  = link_to image_tag("delete.png", alt: "[x]", size: "10x10"), 
+                    message_path(message), 
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+
+            .toast-body
+              p.text-break
+                = message.body
+    end

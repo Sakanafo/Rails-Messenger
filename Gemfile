@@ -59,6 +59,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
 
   gem 'rspec-rails', '~> 6.1', '>= 6.1.2'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'factory_bot_rails', '~> 6.2'
   # RuboCop is a Ruby code style checking and code formatting tool
   gem 'rubocop', '~> 1.63', require: false

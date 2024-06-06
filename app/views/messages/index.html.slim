@@ -1,26 +1,7 @@
 .conteiner.mb-2
   == pagy_nav @pagy
 
-.conteiner.d-grid.gap-auto.rounded
-  .p-4.bg-light.border
-    - @messages.each do |message|
-        div.toast.fade.show (role="alert" aria-live="assertive" aria-atomic="true")
-          div.toast-header
-            small.text-muted
-              = "#{message.user.name} | #{message.user.email}"
-            / small.text-muted = message.user.email
-            strong.mr-auto
-            = message.formatted_created_at
-
-            button.ml-2.close (type="button" data-dismiss="toast" aria-label="Close")
-            span (aria-hidden="true")
-              = link_to image_tag("delete.png", alt: "[x]", size: "10x10"), 
-                message_path(message), 
-                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-
-          div.toast-body
-            p.text-break
-              = message.body
+= render 'messages'
                 
-.container.mt-5
+.container.mt-3
     = render 'form'

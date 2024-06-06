@@ -15,12 +15,10 @@ html
     script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"]
 
   body
-    - render 'layouts/flash_message'
-
     = render 'layouts/header'
 
     .container
-      - if flash[:error]
-        .alert.alert-danger
-            = flash[:error]
+      - flash.each do |key, message|
+        .alert class="alert-#{key == 'notice' ? 'success' : 'danger'}"
+          = message
       == yield
