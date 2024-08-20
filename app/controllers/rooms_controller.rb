@@ -2,9 +2,9 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
+    p params
     @rooms = Room.all
-    @rooms = @rooms.where('name ILIKE ?', "%#{params[:name]}%") if params[:name].present?
-
+    @rooms = RoomSearchService.new(params[:query]).search if params[:query].present?
     @pagy, @rooms = pagy(@rooms, items: 8)
   end
 

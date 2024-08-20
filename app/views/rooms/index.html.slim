@@ -17,5 +17,8 @@
           p.card-text
             | Created:
             = " #{room.created_at.strftime('%d.%m.%Y')}"
+            p
+            | Author: 
+            = room.user.present? ? room.user.name : "Author deleted"
         .card-footer.w-100
           = link_to 'View', room_path(room), class: 'btn btn-outline-success btn-block'

@@ -6,32 +6,65 @@ RSpec.describe RoomsController, type: :controller do
   before { sign_in user }
 
   describe "GET #index" do
-    let!(:room1) { create(:room, name: 'AlphaRoom') }
-    let!(:room2) { create(:room, name: 'BetaRoom') }
-    let!(:other_rooms) { create_list(:room, 10) }
+    let!(:user1) { create(:user) }
+    let!(:rooms) { create_list(:room, 10, user: user1) }
+    let!(:user2) { create(:user, name: 'Bobbi') }
+    let!(:room1) { create(:room, name: 'AlphaRoom', user: user2) }
+    let!(:message1) { create(:message, room: room1, user: user2, body: 'Test message') }
 
     context 'without any params' do
       it 'renders a successful response and assigns the first page of rooms' do
         get :index
+
+        expect(response).to have_http_status(200)
         expect(response).to be_successful
-        expect(assigns(:rooms)).to include(room1, room2)
         expect(assigns(:rooms).size).to eq(8)
       end
     end
 
-    context 'with name param' do
+    context 'with query param' do
       it 'filters rooms by name' do
-        get :index, params: { name: 'Alpha' }
-        expect(assigns(:rooms)).to contain_exactly(room1)
+        get :index, params: { query: room1.name }
+
+        expect(response).to have_http_status(200)
+        expect(assigns(:rooms)).to include(room1)
         expect(assigns(:rooms).size).to eq(1)
+        expect(assigns(:rooms).first.name).to eq(room1.name)
+      end
+
+      it 'filters rooms by user name' do
+        get :index, params: { query: user2.name }
+
+        expect(response).to have_http_status(200)
+        expect(assigns(:rooms)).to include(room1)
+        expect(assigns(:rooms).size).to eq(1)
+        expect(assigns(:rooms).first.user.name).to eq(user2.name)
+      end
+
+      it 'filters rooms by message body' do
+        get :index, params: { query: message1.body }
+
+        expect(response).to have_http_status(200)
+        expect(assigns(:rooms)).to include(room1)
+        expect(assigns(:rooms).size).to eq(1)
+        expect(assigns(:rooms).first.messages.first.body).to eq(message1.body)
+      end
+
+      it 'filters rooms by creator' do
+        get :index, params: { query: user2.name }
+
+        expect(response).to have_http_status(200)
+        expect(assigns(:rooms)).to include(room1)
+        expect(assigns(:rooms).size).to eq(1)
+        expect(assigns(:rooms).first.messages.first.user.name).to eq(user2.name)
       end
     end
 
     context 'pagination' do
       it 'paginates the rooms' do
         get :index, params: { page: 2 }
-        expect(assigns(:rooms).size).to eq(4)
-        expect(assigns(:rooms)).not_to include(room1, room2)
+
+        expect(assigns(:rooms).size).to eq(3)
       end
     end
   end
