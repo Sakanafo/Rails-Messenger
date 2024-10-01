@@ -36,6 +36,9 @@ gem 'slim', '~> 5.2', '>= 5.2.1'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 
+gem 'grape', '~> 2.1', '>= 2.1.3'
+
+gem 'grape-entity', '~> 1.0', '>= 1.0.1'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

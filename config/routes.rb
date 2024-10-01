@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :rooms, only: %i[new create index show]
 
   root 'pages#index'
+  mount BaseApi => '/'
 end

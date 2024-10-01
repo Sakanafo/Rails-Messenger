@@ -8,16 +8,19 @@
 # require 'pagy/extras/bootstrap'
 # require 'pagy/extras/bulma'
 require 'pagy/extras/pagy'
+require 'pagy/extras/metadata'
+require 'pagy/extras/overflow'
 
 # Pagy Variables
 # See https://ddnexus.github.io/pagy/docs/api/pagy#variables
 # You can set any pagy variable as a Pagy::DEFAULT. They can also be overridden per instance by just passing them to
 # Pagy.new|Pagy::Countless.new|Pagy::Calendar::*.new or any of the #pagy* controller methods
 # Here are the few that make more sense as DEFAULTs:
-# Pagy::DEFAULT[:items]       = 5                     # default
+Pagy::DEFAULT[:items]       = 8                       # default
 # Pagy::DEFAULT[:size]        = [1,4,4,1]             # default in pagy < 7.0
-# Pagy::DEFAULT[:page_param]  = :page                 # default
+Pagy::DEFAULT[:page_param]  = :page                 # default
 # Pagy::DEFAULT[:count_args]  = []                    # example for non AR ORMs
+Pagy::DEFAULT[:overflow] = :empty_page
 
 # Extras
 # See https://ddnexus.github.io/pagy/categories/extra
