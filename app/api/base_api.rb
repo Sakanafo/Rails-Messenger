@@ -1,4 +1,5 @@
 require_relative 'helpers/pagination_helpers'
+require_relative 'helpers/users_helpers'
 
 class BaseApi < Grape::API
   version 'v1', using: :path
@@ -7,6 +8,7 @@ class BaseApi < Grape::API
 
   helpers Pagy::Backend
   helpers PaginationHelpers
+  helpers UsersHelpers
 
   rescue_from :all do |e|
     error!({ error: e.message }, 500)

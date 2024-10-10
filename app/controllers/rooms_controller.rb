@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  # before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @rooms = Room.all
@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    # @room.user = current_user
+    @room.user = current_user
     @room.save ? redirect_to(@room, notice: 'Room was successfully created.') : render(:new)
   end
 

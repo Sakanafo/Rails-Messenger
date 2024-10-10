@@ -1,4 +1,6 @@
 class Rooms < BaseApi
+  before { authenticate! }
+
   resource :rooms do
     desc 'Return list of rooms'
     # GET /api/v1/rooms
@@ -19,7 +21,13 @@ class Rooms < BaseApi
     # GET /api/v1/rooms/:id
     route_param :id do
       get do
-        present Room.find(params[:id]), with: Entities::RoomEntity
+        room = Room.find_by(id: params[:id])
+        if room
+          present room, with: Entities::RoomEntity
+        else
+          error!('Room not found', 404)
+        end
+        # present Room.find(params[:id]), with: Entities::RoomEntity
       end
     end
 
@@ -38,10 +46,14 @@ class Rooms < BaseApi
     # POST /api/v1/rooms
     params do
       requires :name, type: String, desc: 'Room name'
-      requires :user_id, type: Integer, desc: 'User ID'
     end
     post do
-      present Room.create(params)
+      new_room = Room.create({ name: params[:name], user_id: current_user.id })
+      if new_room.save
+        present new_room, with: Entities::RoomEntity
+      else
+        error!({ error: 'Failed to create room', details: new_room.errors.full_messages }, 422)
+      end
     end
   end
 end

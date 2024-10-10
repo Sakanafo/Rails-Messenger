@@ -1,35 +1,24 @@
 class Users < BaseApi
-  # helpers PaginationHelpers
-
-  rescue_from :all do |e|
-    error!({ error: e.message, backtrace: e.backtrace }, 500)
-  end
-  # resource :auth do
-  #   desc 'Authenticate user'
-  #   params do
-  #     requires :email, type: String
-  #     requires :password, type: String
-  #   end
-  #   post 'login' do
-  #     user = User.find_for_database_authentication(email: params[:email])
-  #     if user&.valid_password?(params[:password])
-  #       { token: user.authentication_token }
-  #     else
-  #       error!('Unauthorized', 401)
-  #     end
-  #   end
-  # end
-
   resource :users do
+    desc 'User login'
     params do
-      optional :page, type: Integer, default: 1
-      optional :per_page, type: Integer, default: 10
+      requires :email, type: String
+      requires :password, type: String
     end
-    get do
-      users = User.all
-      data = paginate(users)
-      # present data[:items], with: Entities::UserEntity
-      present data[:pagination], with: Entities::PaginationEntity
+    post :sign_in do
+      user = User.find_by(email: params[:email])
+      if user&.valid_password?(params[:password])
+        token = user.generate_jwt
+        header 'Authorization', " #{token} "
+        { message: 'Login successful', user: user.as_json(only: %i[id email name]) }
+      else
+        error!('Invalid email or password', 401)
+      end
+    end
+    desc 'User logout'
+    delete :sign_out do
+      authenticate!
+      { message: 'Logged out successfully' }
     end
   end
 end

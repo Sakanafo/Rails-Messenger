@@ -1,4 +1,6 @@
 class Messages < BaseApi
+  before { authenticate! }
+
   resource :messages do
     desc 'Return messages from general chat'
     # GET /api/v1/messages
@@ -11,20 +13,29 @@ class Messages < BaseApi
     # GET /api/v1/messages/:id
     route_param :id do
       get do
-        present Message.find(params[:id]), with: Entities::MessageEntity
+        message = Message.find_by(id: params[:id])
+        if message
+          present message, with: Entities::MessageEntity
+        else
+          error!('Message not found', 404)
+        end
+        # present Message.find(params[:id]), with: Entities::MessageEntity
       end
     end
 
     desc 'Create a new message'
     # POST /api/v1/messages/
     params do
-      requires :user_id, type: Integer, desc: 'User ID'
       requires :body, type: String, desc: 'Body message'
       optional :room_id, type: Integer, desc: 'Room ID'
     end
     post do
-      # authenticate_user!
-      present Message.create(params), with: Entities::MessageEntity
+      message = current_user.messages.create({ body: params[:body], room_id: params[:room_id] })
+      if message.save
+        present message, with: Entities::MessageEntity
+      else
+        error!({ error: 'Failed to create message', details: message.errors.full_messages }, 422)
+      end
     end
   end
 end
